@@ -7,6 +7,17 @@ const path = require("path");
 const _ = require("lodash");
 const defaultConfig = require("electrode-confippet").config;
 const Confippet = require("electrode-confippet");
+require('dotenv').config();
+
+const serverRoutes = require('./routes/router');
+
+const loadServerRoutes = function() {
+  return new Promise((resolve, reject) => {
+    app.use(serverRoutes);
+    resolve(true);
+  });
+}
+
 
 const loadConfigs = function(userConfig) {
   //use confippet to merge user config and default config
@@ -61,6 +72,7 @@ module.exports = function electrodeServer(userConfig, callback) {
   const promise = Promise.resolve(userConfig)
     .then(loadConfigs)
     .then(setStaticPaths)
+    .then(loadServerRoutes)
     .then(setRouteHandler)
     .then(startServer);
 
