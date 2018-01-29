@@ -7,7 +7,10 @@ const path = require("path");
 const _ = require("lodash");
 const defaultConfig = require("electrode-confippet").config;
 const Confippet = require("electrode-confippet");
-require('dotenv').config();
+
+if (process.env.ENVIRONMENT !== 'production') {
+  require('dotenv').config();  // loads the .env file
+}
 
 const serverRoutes = require('./routes/router');
 
