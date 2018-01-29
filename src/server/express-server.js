@@ -8,6 +8,12 @@ const _ = require("lodash");
 const defaultConfig = require("electrode-confippet").config;
 const Confippet = require("electrode-confippet");
 
+/*
+const redis = require('redis');
+const redisClient = redis.createClient(process.env.REDIS_URL);
+let session = require('express-session')
+*/
+
 if (process.env.ENVIRONMENT !== 'production') {
   require('dotenv').config();  // loads the .env file
 }
@@ -21,6 +27,19 @@ const loadServerRoutes = function() {
   });
 }
 
+/*
+const loadSessions = function() {
+  return new Promise((resolve, reject) => {
+    app.use(session({
+      secret: 'keyboard cat',
+      resave: false,
+      saveUninitialized: true,
+      cookie: { secure: true }
+    }));
+    resolve(true);
+  });
+}
+*/
 
 const loadConfigs = function(userConfig) {
   //use confippet to merge user config and default config

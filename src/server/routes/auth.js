@@ -36,7 +36,9 @@ const callback = function(req, res, next) {
   
   oauth.authorizationCode.getToken(tokenConfig)
   .then((result) => {
-    const token = oauth2.accessToken.create(result);
+    const token = oauth.accessToken.create(result);
+    console.log('token', token)
+    res.cookie('auth_token', token.token.access_token);
     res.redirect('/');
   })
   .catch((error) => {
