@@ -3,7 +3,9 @@ import { Route, Router, browserHistory, IndexRoute } from "react-router";
 import Home from "./components/home";
 import SearchView from './components/search-view';
 import { connect } from "react-redux";
-import { userLogin } from './actions'
+import { userLogin } from './actions';
+import { ApolloProvider, withApollo, graphql } from 'react-apollo';
+import createGithubClient from './graphql_clients/github';
 
 const getUserData = (state) => {
   return {
@@ -42,10 +44,11 @@ class App extends React.Component {
     }
   }
   render() {
+    const gqlClient = createGithubClient({token: this.props.accessToken});
     return (
-      <div>
+      <ApolloProvider client={gqlClient}>
         {this.props.children}
-      </div>
+      </ApolloProvider>
     )
   }
 }
@@ -56,7 +59,8 @@ const mapStateToProps = state => {
   return {
     checked: state.checkBox.checked,
     value: state.number.value,
-    isLoggedIn: state.user.isLoggedin
+    isLoggedIn: state.user.isLoggedin.isRequired,
+    accessToken: state.user.accessToken
   };
 };
 

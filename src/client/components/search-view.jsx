@@ -4,10 +4,22 @@ import PropTypes from "prop-types";
 import skeleton from "../styles/skeleton.css";
 import custom from "../styles/custom.css";
 import { withRouter } from 'react-router'
-import { withApollo, graphql } from 'react-apollo';
+import { ApolloProvider, withApollo, graphql } from 'react-apollo';
 import { ApolloClient } from 'apollo-client';
 import gql from 'graphql-tag';
 import { updateSearchBox } from '../actions';
+
+
+
+const DisplayUser = (props) => {
+  const user = props.user;
+  return (
+    <li>
+      <img src={user.avatar_url} />
+      <div>username: {user.login}</div>
+    </li>
+  )
+}
 
 /*
   Searchview will have a searchbox and a listing of results.
@@ -32,6 +44,10 @@ class SearchView extends Component {
         </div>
       )
     }
+
+    //create a graphql client
+    //debugger
+
     return (
       <div>
         <form>
@@ -41,7 +57,7 @@ class SearchView extends Component {
             />
         </form>
         <ul>
-          
+          {(this.props.results.map((user) =>  (<DisplayUser user={user} key={user.id}/>) ))}
         </ul>        
       </div>
     );
@@ -51,15 +67,18 @@ class SearchView extends Component {
 SearchView.propTypes = {
   searchQuery: PropTypes.string.isRequired,
   isLoggedIn: PropTypes.bool.isRequired,
-  accessToken: PropTypes.string
+  accessToken: PropTypes.string,
+  results: PropTypes.array
 }
 
 const mapStateToProps = state => {
   return {
     searchQuery: state.searchBox.searchQuery,
     isLoggedIn: state.user.isLoggedIn,
-    accessToken: state.user.accessToken
+    accessToken: state.user.accessToken,
+    results: state.searchBox.results
   }
 };
+
 
 export default connect(mapStateToProps, dispatch => ({ dispatch }))(withRouter(SearchView));

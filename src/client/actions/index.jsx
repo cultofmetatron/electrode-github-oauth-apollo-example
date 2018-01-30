@@ -23,6 +23,13 @@ export const updateSearchBox = ({query}) => {
   };
 };
 
+export const setSearchResults = ({results}) => {
+  return {
+    type: "SearchBox:results:update",
+    results: results
+  };
+};
+
 export const userLogin = ({accessToken}) => {
   return {
     type: "User:login",

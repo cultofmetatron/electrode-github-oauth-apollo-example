@@ -26,7 +26,7 @@ const number = (store, action) => {
 };
 
 const searchBox = (store = {
-  searchQuery: "foo",
+  searchQuery: "",
   results: []
 }, action) => {
   if (action.type === "SearchBox:searchTerm:update") {
@@ -37,6 +37,16 @@ const searchBox = (store = {
       searchQuery: action.query
     };
   }
+
+  if (action.type === "SearchBox:results:update") {
+    
+    return {
+      ...store,
+      results: action.results
+    }
+  }
+
+
   return store;
 }
 
