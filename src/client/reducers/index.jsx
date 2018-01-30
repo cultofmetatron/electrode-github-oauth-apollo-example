@@ -1,4 +1,5 @@
 import {combineReducers} from "redux";
+import Immutable from 'immutable';
 
 const checkBox = (store, action) => {
   if (action.type === "TOGGLE_CHECK") {
@@ -24,7 +25,12 @@ const number = (store, action) => {
   return store || {value: 0};
 };
 
+const searchBox = (store, action) => {
+  return store || Immutable.Map({ searchTerm: 'foo' });
+}
+
 export default combineReducers({
   checkBox,
-  number
+  number,
+  searchBox
 });
