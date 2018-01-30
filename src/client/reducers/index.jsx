@@ -25,12 +25,40 @@ const number = (store, action) => {
   return store || {value: 0};
 };
 
-const searchBox = (store, action) => {
-  return store || Immutable.Map({ searchTerm: 'foo' });
+const searchBox = (store = {
+  searchQuery: "foo",
+  results: []
+}, action) => {
+  if (action.type === "SearchBox:searchTerm:update") {
+    //return store.set("searchQuery", action.term);
+    //store.searchQuery = action.query;
+    return {
+      ...store,
+      searchQuery: action.query
+    };
+  }
+  return store;
+}
+
+const user = (store, action) => {
+
+  if (action.type === "User:login") {
+    return {
+      ...store,
+      accessToken: action.accessToken,
+      isLoggedIn: true
+    };
+  }
+
+  return store || Immutable.Map({
+    isLoggedIn: false,
+    accessToken: null
+  });;
 }
 
 export default combineReducers({
   checkBox,
   number,
-  searchBox
+  searchBox,
+  user
 });

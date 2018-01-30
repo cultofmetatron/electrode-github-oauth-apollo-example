@@ -37,6 +37,7 @@
     "install": "echo OK"
   },
   "dependencies": {
+    "apollo-client-preset": "^1.0.7",
     "bluebird": "^3.4.6",
     "connect-session": "^0.0.1",
     "dotenv": "^4.0.0",
@@ -46,8 +47,11 @@
     "electrode-redux-router-engine": "^1.5.0",
     "express": "^4.0.0",
     "express-session": "^1.15.6",
+    "graphql": "^0.12.3",
+    "graphql-tag": "^2.6.1",
     "immutable": "^3.8.2",
     "lodash": "^4.10.1",
+    "react-apollo": "^2.0.4",
     "redis": "^2.8.0",
     "semantic-ui-react": "^0.77.2",
     "simple-oauth2": "^1.5.0"

@@ -15,3 +15,17 @@ export const decNumber = () => {
     type: "DEC_NUMBER"
   };
 };
+
+export const updateSearchBox = ({query}) => {
+  return {
+    type: "SearchBox:searchTerm:update",
+    query: query
+  };
+};
+
+export const userLogin = ({accessToken}) => {
+  return {
+    type: "User:login",
+    accessToken
+  };
+};

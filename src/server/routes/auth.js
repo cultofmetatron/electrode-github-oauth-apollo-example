@@ -48,8 +48,7 @@ const callback = function(req, res, next) {
 }
 
 const auth = function(req, res, next) {
- 
-
+  console.log('wtf')
   res.redirect(authorizeUrl);
 }
 
