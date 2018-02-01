@@ -9,6 +9,24 @@ import { ApolloClient } from 'apollo-client';
 import gql from 'graphql-tag';
 import { updateSearchBox } from '../actions';
 
+import { 
+  Container,
+  Button,
+  Search,
+  Label
+} from 'semantic-ui-react';
+
+const DisplayUser = (props) => {
+  let user = props.data.user;
+
+  return (
+    <div>
+      {user.login}
+      <img src={user.avatarUrl} />
+    </div>
+  )
+}
+
 class UserView extends Component {
   constructor(props) {
     super(props)
@@ -16,9 +34,13 @@ class UserView extends Component {
   render() {
     return (
       <div>
+        <Container>
+          {(this.props.data.loading) ? <h1>loading...</h1> : <DisplayUser {...this.props}></DisplayUser>}
+        </Container>
+
         <pre>
           {this.props.params.login}
-          {JSON.stringify(this.props, null, 2)}
+          {JSON.stringify(this.props.data.user, null, 2)}
         </pre>
       </div>
     )
@@ -41,6 +63,34 @@ query($login:String!) {
     id
     login
     bio
+    avatarUrl(size: 200)
+		isHireable
+    websiteUrl
+    repositories(first: 100) {
+      edges {
+        node {
+          id
+          name
+          nameWithOwner
+        }
+      }
+    }
+    followers(first: 100) {
+      edges {
+        node {
+          id
+          login
+        }
+      }
+    }
+    following(first: 100) {
+      edges {
+        node {
+          id
+          login
+        }
+      }
+    }
   }
 }
 `;
