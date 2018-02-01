@@ -9,10 +9,6 @@ import { ApolloProvider, withApollo, graphql } from 'react-apollo';
 import createGithubClient from './graphql_clients/github';
 import { Container, Button } from 'semantic-ui-react';
 
-//import 'semantic-ui-css/semantic.css';
-
-
-
 const getUserData = (state) => {
   return {
     user: state.user
@@ -59,7 +55,6 @@ class App extends React.Component {
       <ApolloProvider client={gqlClient}>
         <Container>
           {this.props.children}
-          <Button primary>Click</Button>
         </Container>
       </ApolloProvider>
     )

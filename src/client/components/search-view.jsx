@@ -7,17 +7,21 @@ import { withRouter } from 'react-router'
 import { ApolloProvider, withApollo, graphql } from 'react-apollo';
 import { ApolloClient } from 'apollo-client';
 import gql from 'graphql-tag';
+
 import { updateSearchBox } from '../actions';
 
+import { 
+  Container,
+  Button,
+  Search,
+  Label
+} from 'semantic-ui-react';
 
 
 const DisplayUser = (props) => {
-  const user = props.user;
+  const user = props;
   return (
-    <li>
-      <img src={user.avatar_url} />
-      <div>username: {user.login}</div>
-    </li>
+      <Label key={props.id} content={user.login} />
   )
 }
 
@@ -36,12 +40,19 @@ class SearchView extends Component {
   updateSearchField(ev) {
     this.props.dispatch(updateSearchBox({query: ev.target.value}))
   }
+  handleResultSelect(ev, data) {
+    let user = data.result;
+    
+    this.props.router.push(`/user/${user.login}`);
+  }
   render() {
     if (!this.props.isLoggedIn) {
       return (
-        <div>
-          <a href="/auth">login to continue</a>
-        </div>
+        <Container>
+          <Button>
+            <a href="/auth">login to continue</a>
+          </Button>
+        </Container>
       )
     }
 
@@ -51,21 +62,23 @@ class SearchView extends Component {
     return (
       <div>
         <form>
-          <input
-            value={this.props.searchQuery}
-            onChange={this.updateSearchField.bind(this)}
-            />
+          <Search
+            value={this.props.search_query}
+            onSearchChange={this.updateSearchField.bind(this)}
+            results={this.props.results}
+            resultRenderer={DisplayUser}
+            onResultSelect={this.handleResultSelect.bind(this)}
+            {...this.props}
+          />
         </form>
-        <ul>
-          {(this.props.results.map((user) =>  (<DisplayUser user={user} key={user.id}/>) ))}
-        </ul>        
+              
       </div>
     );
   }
 };
 
 SearchView.propTypes = {
-  searchQuery: PropTypes.string.isRequired,
+  search_query: PropTypes.string.isRequired,
   isLoggedIn: PropTypes.bool.isRequired,
   accessToken: PropTypes.string,
   results: PropTypes.array
@@ -73,7 +86,7 @@ SearchView.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    searchQuery: state.searchBox.searchQuery,
+    search_query: state.searchBox.searchQuery,
     isLoggedIn: state.user.isLoggedIn,
     accessToken: state.user.accessToken,
     results: state.searchBox.results
