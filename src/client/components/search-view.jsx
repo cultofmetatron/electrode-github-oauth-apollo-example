@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import skeleton from "../styles/skeleton.css";
-import custom from "../styles/custom.css";
+//import skeleton from "../styles/skeleton.css";
+//import custom from "../styles/custom.css";
 import { withRouter } from 'react-router'
 import { ApolloProvider, withApollo, graphql } from 'react-apollo';
 import { ApolloClient } from 'apollo-client';

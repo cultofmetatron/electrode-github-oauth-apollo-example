@@ -1,6 +1,6 @@
 import React from "react";
-import skeleton from "../styles/skeleton.css";
-import custom from "../styles/custom.css";
+//import skeleton from "../styles/skeleton.css";
+//import custom from "../styles/custom.css";
 
 /*
  * Demostrates a simple pure functional component

@@ -26,6 +26,7 @@ module.exports = {
       "module": "electrode-react-webapp/lib/express",
       "options": {
         "pageTitle": "github-oauth",
+        "htmlFile": "./src/server/plugins/webapp/index.html",
         "paths": {
           "*": {
             "content": {

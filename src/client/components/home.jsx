@@ -17,8 +17,8 @@
 import React from "react";
 import "../styles/normalize.css";
 import "../styles/raleway.css";
-import skeleton from "../styles/skeleton.css";
-import custom from "../styles/custom.css";
+//import skeleton from "../styles/skeleton.css";
+//import custom from "../styles/custom.css";
 import electrodePng from "../images/electrode.png";
 import DemoStates from "./demo-states";
 import DemoPureStates from "./demo-pure-states";

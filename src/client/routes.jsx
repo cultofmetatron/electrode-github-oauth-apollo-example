@@ -7,6 +7,11 @@ import { connect } from "react-redux";
 import { userLogin } from './actions';
 import { ApolloProvider, withApollo, graphql } from 'react-apollo';
 import createGithubClient from './graphql_clients/github';
+import { Container, Button } from 'semantic-ui-react';
+
+//import 'semantic-ui-css/semantic.css';
+
+
 
 const getUserData = (state) => {
   return {
@@ -52,7 +57,10 @@ class App extends React.Component {
     const gqlClient = createGithubClient({token: this.props.user.accessToken});
     return (
       <ApolloProvider client={gqlClient}>
-        {this.props.children}
+        <Container>
+          {this.props.children}
+          <Button primary>Click</Button>
+        </Container>
       </ApolloProvider>
     )
   }
