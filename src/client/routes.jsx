@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Router, browserHistory, IndexRoute } from "react-router";
 import Home from "./components/home";
 import SearchView from './components/search-view';
+import UserView from './components/user-view';
 import { connect } from "react-redux";
 import { userLogin } from './actions';
 import { ApolloProvider, withApollo, graphql } from 'react-apollo';
@@ -13,6 +14,9 @@ const getUserData = (state) => {
   }
 }
 
+/*
+  mounts the component inside here so that we can use checks for things such as the browser existing
+*/
 class App extends React.Component {
   constructor(props) {
     super(props)
@@ -44,7 +48,8 @@ class App extends React.Component {
     }
   }
   render() {
-    const gqlClient = createGithubClient({token: this.props.accessToken});
+
+    const gqlClient = createGithubClient({token: this.props.user.accessToken});
     return (
       <ApolloProvider client={gqlClient}>
         {this.props.children}
@@ -66,7 +71,8 @@ const mapStateToProps = state => {
 
 const routes = (
   <Route path="/" component={AppRoot}>
-    <IndexRoute component={SearchView} />,
+    <IndexRoute component={SearchView} />
+    <Route path="/user/:login" component={UserView} />
     <Route path="/foo" component={Home} />
   </Route>
 )
