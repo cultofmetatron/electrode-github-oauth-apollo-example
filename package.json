@@ -37,7 +37,7 @@
     "install": "echo OK"
   },
   "dependencies": {
-    "apollo-client-preset": "^1.0.7",
+    "apollo-client-preset": "^1.0.6",
     "apollo-link-context": "^1.0.3",
     "axios": "^0.17.1",
     "bluebird": "^3.4.6",
