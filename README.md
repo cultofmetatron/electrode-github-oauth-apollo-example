@@ -3,18 +3,22 @@
 
 ## Installation
 
+create a file .env
+
+```
+ENVIRONMENT=development
+GITHUB_CALLBACK="http://127.0.0.1:3000/auth/callback"
+GITHUB_CLIENT_ID={your client id}
+GIRHUB_SECRET={your secret}
+
+```
+
+
 ```sh
-$ npm install --save github-oauth
+$ yarn
+$ clap dev
 ```
 
-## Usage
-
-```js
-var githubOauth = require('github-oauth');
-
-githubOauth('Rainbow');
-```
-## License
 
 Apache-2.0 © [Peter de Croos](peterdecroos.com)
 
